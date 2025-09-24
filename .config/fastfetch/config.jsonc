@@ -1,0 +1,282 @@
+// Load with --load-config examples/2.jsonc
+// Note that you must replace the image path to an existing image to display it.
+
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "file-raw",
+    "source": "~/.config/fastfetch/fedorapuccin-macchiato-ascii-50x50.txt",
+    "height": 1,
+    "width": 10,
+    "padding": {
+      "top": 9,
+      "right": 0,
+      "left": 2,
+    },
+  },
+  "display": {
+    "separator": ": ",
+    "constants": ["──────────────────────────────"],
+  },
+  "modules": [
+    {
+      "type": "custom",
+      "format": "╭{$1}{$1}╮",
+      "outputColor": "90",
+    },
+    {
+      "type": "title",
+      "keyWidth": 10,
+    },
+    {
+      "type": "custom",
+      "format": "╰{$1}{$1}╯",
+      "outputColor": "90",
+    },
+    {
+      "type": "custom",
+      "format": " {#90}  {#31}  {#32}  {#33}  {#34}  {#35}  {#36}  {#37}  {#38}  {#39}       {#38}  {#37}  {#36}  {#35}  {#34}  {#33}  {#32}  {#31}  {#90}",
+    },
+    {
+      "type": "custom",
+      "format": "╭{$1}{$1}╮",
+      "outputColor": "90",
+    },
+    {
+      "type": "os",
+      "key": "{icon} OS",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "kernel",
+      "key": "│ ├",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "packages",
+      "key": "│ ├󰏖",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "shell",
+      "key": "│ ╰",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "wm",
+      "key": " DE/WM",
+      "keyColor": "blue",
+    },
+    {
+      "type": "lm",
+      "key": "│ ├󰧨",
+      "keyColor": "blue",
+    },
+    {
+      "type": "wmtheme",
+      "key": "│ ├󰉼",
+      "keyColor": "blue",
+    },
+    {
+      "type": "icons",
+      "key": "│ ├󰀻",
+      "keyColor": "blue",
+    },
+    {
+      "type": "terminal",
+      "key": "│ ├",
+      "keyColor": "blue",
+    },
+    {
+      "type": "wallpaper",
+      "key": "│ ╰󰸉",
+      "keyColor": "blue",
+    },
+    {
+      "type": "host",
+      "key": "󰌢 PC",
+      "keyColor": "green",
+    },
+    {
+      "type": "cpu",
+      "key": "│ ├󰻠",
+      "keyColor": "green",
+      "format": "{name} {march} ({cores-physical}c/{cores-logical}t) @ {freq-max} ({temperature})",
+      "temp": true,
+    },
+    {
+      "type": "gpu",
+      "key": "│ ├󰍛",
+      "keyColor": "green",
+      "temp": true,
+    },
+    {
+      "type": "disk",
+      "key": "│ ├",
+      "keyColor": "green",
+    },
+    {
+      "type": "memory",
+      "key": "│ ├󰑭",
+      "keyColor": "green",
+    },
+    {
+      "type": "swap",
+      "key": "│ ├󰓡",
+      "keyColor": "green",
+    },
+    {
+      "type": "uptime",
+      "key": "│ ├󰅐",
+      "keyColor": "green",
+    },
+    {
+      "type": "display",
+      "key": "│ ╰󰍹",
+      "keyColor": "green",
+    },
+    {
+      "type": "localip",
+      "key": " NETWORK",
+      "keyColor": "cyan",
+      "format": "{ipv4}",
+    },
+    {
+      "type": "command",
+      "condition": { "succeeded": true },
+      "key": "│ ├󰒃 Tailscale",
+      "keyColor": "cyan",
+      "text": "tailscale status --json | jq -r '.BackendState'",
+    },
+    {
+      "type": "command",
+      "key": "│ │ ├",
+      "keyColor": "cyan",
+      "text": "tailscale status --json | jq -r '.Version'",
+      "condition": { "succeeded": true },
+    },
+    {
+      "type": "command",
+      "key": "│ │ ├",
+      "keyColor": "cyan",
+      "text": "tailscale status --json | jq -r 'if .BackendState == \"Running\" then .CurrentTailnet.Name else \"\" end'",
+      "condition": { "succeeded": true },
+    },
+    {
+      "type": "command",
+      "key": "│ │ ├󰈆",
+      "keyColor": "cyan",
+      "text": "tailscale status --json | jq -r 'if .BackendState == \"Running\" then (.Peer | values[] | select(.ExitNode) | .HostName) else \"\" end'",
+      "condition": { "succeeded": true },
+    },
+    {
+      "type": "command",
+      "key": "│ │ ├",
+      "keyColor": "cyan",
+      "text": "tailscale status --json | jq -r 'if .BackendState == \"Running\" then (.Peer | values[] | select(.ExitNode) | (.Location.Country) + \", \" + (.Location.City)) else \"\" end'",
+    },
+    {
+      "type": "command",
+      "key": "│ │ ╰󱦂",
+      "keyColor": "cyan",
+      "text": "tailscale status --json | jq -r 'if .BackendState == \"Running\" then (.TailscaleIPs[0]) else \"\" end' ",
+      "condition": { "succeeded": true },
+    },
+    {
+      "type": "wifi",
+      "key": "│ ├ ",
+      "keyColor": "cyan",
+      "format": "{ssid} — {signal-quality} {band}Ghz — {security} {protocol}",
+      "condition": { "succeeded": true },
+    },
+    {
+      "type": "localip",
+      "key": "│ ├󰈀",
+      "keyColor": "cyan",
+      "format": "{mac} {ipv4} ({ifname}) ",
+      "namePrefix": "",
+      "defaultRouteOnly": false,
+      "showMac": true,
+      "showSpeed": true,
+      "condition": { "succeeded": true },
+    },
+    {
+      "type": "custom",
+      "key": " DEVELOPMENT",
+      "keyColor": "red",
+      "format": "Know none of ts",
+    },
+    {
+      "type": "editor",
+      "key": "│ ├󱞎",
+      "keyColor": "red",
+    },
+    {
+      "type": "command",
+      "key": "│ ├",
+      "keyColor": "red",
+      "text": "rustc --version | awk '{print $2}'",
+      "condition": { "succeeded": true },
+    },
+    {
+      "type": "command",
+      "key": "│ ├",
+      "keyColor": "red",
+      "text": "python3 --version 2>&1 | awk '{print $2}'", // Use 'python' if python3 isn't primary
+      "condition": { "succeeded": true },
+    },
+    {
+      "type": "command",
+      "key": "│ ├",
+      "keyColor": "red",
+      "text": "node --version | sed 's/^v//'", // Strips the 'v' prefix
+      "condition": { "succeeded": true },
+    },
+    {
+      "type": "command",
+      "key": "│ ├",
+      "keyColor": "red",
+      "text": "go version | awk '{print $3}' | sed 's/^go//'", // Strips the 'go' prefix
+      // "condition": { "succeeded": true },
+    },
+    //    {
+    //      "type": "command",
+    //      "key": "│ ├ Java",
+    //      "keyColor": "red",
+    //      "text": "java -version 2>&1 | head -n 1 | awk -F '\"' '{print $2}'",
+    //      "condition": { "succeeded": true },
+    //    },
+    {
+      "type": "command",
+      "key": "│ ╰",
+      "keyColor": "red",
+      "text": "git --version | awk '{print $3}'",
+      "condition": { "succeeded": true },
+    },
+    {
+      "type": "sound",
+      "key": " SOUND",
+      "keyColor": "magenta",
+    },
+    {
+      "type": "player",
+      "key": "│ ├󰥠",
+      "keyColor": "magenta",
+    },
+    {
+      "type": "media",
+      "key": "│ ╰󰝚",
+      "keyColor": "magenta",
+    },
+    {
+      "type": "custom",
+      "format": "╰{$1}{$1}╯",
+      "outputColor": "90",
+    },
+    //    "break",
+    //    {
+    //      "type": "custom",
+    //      "format": " {#90}  {#31}  {#32}  {#33}  {#34}  {#35}  {#36}  {#37}  {#38}  {#39}       {#38}  {#37}  {#36}  {#35}  {#34}  {#33}  {#32}  {#31}  {#90}",
+    //    },
+  ],
+}
