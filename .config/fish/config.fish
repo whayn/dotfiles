@@ -20,7 +20,7 @@ zoxide init fish | source
 alias wake-pc="wol 04:7C:16:ED:00:82"
 alias fishconfig="zed ~/.config/fish/config.fish"
 alias dotconfig="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
-alias lg-dotconfig='lazygit --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias lg-dotconfig='lazygit --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 
 # Direnv setup
