@@ -1,5 +1,15 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    if type -q eza
+        alias ls='eza --group-directories-first --icons --header'
+    end
+    if type -q bat
+        alias cat='bat'
+    end
+
+    # Set up bat for man pages if available
+    if type -q batman
+        alias man='batman'
+    end
 end
 
 # Variables to set
@@ -8,6 +18,10 @@ set -Ux GOBIN $HOME/.local/bin
 
 set -g fish_greeting
 
+# Set Default Editor
+set -gx EDITOR zed
+
+# Starship setup
 starship init fish | source
 
 # Zoxide setup
@@ -26,7 +40,6 @@ alias lg-dotconfig='lazygit --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # Direnv setup
 direnv hook fish | source
 
-# Set Default Editor
-set -gx EDITOR zed
+
 
 # fastfetch
