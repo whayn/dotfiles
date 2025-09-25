@@ -19,7 +19,15 @@ set -Ux GOBIN $HOME/.local/bin
 set -g fish_greeting
 
 # Set Default Editor
-set -gx EDITOR zed
+if type -q zed
+    set -Ux EDITOR zed
+else if type -q code
+    set -Ux EDITOR code
+else if type -q nvim
+    set -Ux EDITOR nvim
+else
+    set -Ux VISUAL nano
+end
 
 # Starship setup
 starship init fish | source
@@ -35,7 +43,6 @@ alias wake-pc="wol 04:7C:16:ED:00:82"
 alias fishconfig="zed ~/.config/fish/config.fish"
 alias dotconfig="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias lg-dotconfig='lazygit --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
 
 # Direnv setup
 direnv hook fish | source
