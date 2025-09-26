@@ -30,25 +30,29 @@ else
 end
 
 # Setup mamba before init packages
-# >>> mamba initialize >>>
+# >> mamba initialize >>
 # !! Contents within this block are managed by 'mamba shell init' !!
-set -gx MAMBA_EXE "/home/tp-home018/4a5d105a-0c44-4968-a1a6-f754540e9e6d/miniforge3/bin/mamba"
-set -gx MAMBA_ROOT_PREFIX "/home/tp-home018/4a5d105a-0c44-4968-a1a6-f754540e9e6d/.local/share/mamba"
-$MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
-# <<< mamba initialize <<<
+# No they arent because I manage them myself ¬_¬
+if test -x "$HOME/miniforge3/bin/mamba"
+    set -gx MAMBA_EXE "$HOME/miniforge3/bin/mamba"
+    set -gx MAMBA_ROOT_PREFIX "$HOME/.local/share/mamba"
+    $MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
+end
+# << mamba initialize <<
 
-# >>> conda initialize >>>
+# >> conda initialize >>
 # !! Contents within this block are managed by 'conda init' !!
-if test -f /home/tp-home018/mfalgay/miniforge3/bin/conda
-    eval /home/tp-home018/mfalgay/miniforge3/bin/conda "shell.fish" "hook" $argv | source
+# No they arent because I manage them myself ¬_¬
+if test -f $HOME/miniforge3/bin/conda
+    eval $HOME/miniforge3/bin/conda "shell.fish" "hook" $argv | source
 else
-    if test -f "/home/tp-home018/mfalgay/miniforge3/etc/fish/conf.d/conda.fish"
-        . "/home/tp-home018/mfalgay/miniforge3/etc/fish/conf.d/conda.fish"
+    if test -f "$HOME/miniforge3/etc/fish/conf.d/conda.fish"
+        . "$HOME/miniforge3/etc/fish/conf.d/conda.fish"
     else
-        set -x PATH "/home/tp-home018/mfalgay/miniforge3/bin" $PATH
+        set -x PATH "$HOME/miniforge3/bin" $PATH
     end
 end
-# <<< conda initialize <<<
+# << conda initialize <<
 
 # Starship setup
 starship init fish | source
@@ -74,6 +78,3 @@ end
 
 
 # fastfetch
-
-
-
