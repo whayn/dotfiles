@@ -55,10 +55,12 @@ end
 # << conda initialize <<
 
 # Starship setup
-starship init fish | source
+if type -q starship
+    starship init fish | source
+end
 
 # Zoxide setup
-if type -q direnv
+if type -q zoxide
 	zoxide init fish | source
 end
 
