@@ -8,7 +8,15 @@ if status is-interactive
 
     # Set up bat for man pages if available
     if type -q batman
+        batman --export-env | source
         alias man='batman'
+    end
+
+    # Set up bat aliases and abbreviations if available
+    if type -q bat
+        # For help commands
+        abbr -a --position anywhere -- --help '--help | bat -plhelp'
+        abbr -a --position anywhere -- -h '-h | bat -plhelp'
     end
 end
 
