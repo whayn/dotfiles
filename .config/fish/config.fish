@@ -27,12 +27,24 @@ set -Ux GOBIN $HOME/.local/bin
 set -g fish_greeting
 
 # Set Default Editor
-if type -q zed
-    set -Ux EDITOR zed
-else if type -q code
-    set -Ux EDITOR code
-else if type -q nvim
+if type -q nvim
     set -Ux EDITOR nvim
+else if type -q vim
+    set -Ux EDITOR vim
+else
+    set -Ux EDITOR nano
+end
+
+
+# Set default visual editor
+if type -q zed
+    set -Ux VISUAL "zed --wait"
+else if type -q code
+    set -Ux VISUAL "code --wait"
+else if type -q nvim
+    set -Ux VISUAL nvim
+else if type -q vim
+    set -Ux VISUAL vim
 else
     set -Ux VISUAL nano
 end
