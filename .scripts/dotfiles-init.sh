@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #!/usr/bin/env bash
-set -euo pipefail
+set -eu pipefail
 
 DOTFILES_REPO="https://github.com/whayn/dotfiles.git"
 GIT_DIR="$HOME/.dotfiles"
