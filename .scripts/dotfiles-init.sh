@@ -57,6 +57,9 @@ fi
 # keep git quiet about all other untracked files under $HOME
 config config --local status.showUntrackedFiles no
 
+echo "Dotfiles setup complete."
+echo "Backed up any conflicting files to $BACKUP_DIR"
+
 
 # Adapted from https://mjones44.medium.com/storing-dotfiles-in-a-git-repository-53f765c0005d
 # Now you can use the config alias to manage your dotfiles, e.g.:
