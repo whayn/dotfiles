@@ -29,7 +29,7 @@ else
   # run checkout once and capture stderr; use sed to extract lines that are file paths
   set +e
   conflicts=$(config checkout 2>&1 || true \
-    | sed -n 's/^[[:space:]]\+\(.*\)/\1/p')
+    | sed -n 's/^        \([[:alnum:].].*\)$/\1/p')
   set -e
 
   # Move each conflict, creating parent dirs in backup
