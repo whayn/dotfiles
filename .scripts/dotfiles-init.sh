@@ -28,8 +28,7 @@ else
 
   # run checkout once and capture stderr; use sed to extract lines that are file paths
   set +e
-  conflicts=$(config checkout 2>&1 || true \
-    | sed -n 's/^        \([[:alnum:].].*\)$/\1/p')
+  conflicts=$(config checkout 2>&1 || true | awk '/overwritten by checkout:/{flag=1;next}/Aborting/{flag=0}flag' | sed 's/^[[:space:]]*//')
   set -e
 
   # Move each conflict, creating parent dirs in backup
@@ -61,3 +60,4 @@ config config --local status.showUntrackedFiles no
 # config add .vimrc
 # config commit -m "Add vimrc"
 # config push
+ 
