@@ -31,7 +31,7 @@ else
   set -e
 
   # run checkout once and capture stderr; use sed to extract lines that are file paths
-  conflicts=$(echo "$checkout" | awk '/overwritten by checkout:/{flag=1;next}/Aborting/{flag=0}flag' | sed 's/^[[:space:]]*//')
+  conflicts=$(echo "$checkout" | awk '/overwritten by checkout:/{flag=1;next}/Please move or remove them before you switch branches/{flag=0}flag' | sed 's/^[[:space:]]*//')
   echo "Detected conflicts:"
   echo "$conflicts"
 
@@ -51,7 +51,7 @@ else
 
   # retry checkout (should succeed now)
   config checkout
-  echo "Checked out dotfiles after moving conflicts."
+  echo "Checked out dotfiles after moving conflict s."
 fi
 
 # keep git quiet about all other untracked files under $HOME
