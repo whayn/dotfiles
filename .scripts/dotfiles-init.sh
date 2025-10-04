@@ -26,12 +26,14 @@ if config checkout 2>/dev/null; then
 else
   echo "Checkout failed — backing up conflicting files to $BACKUP_DIR"
 
-  # run checkout once and capture stderr; use sed to extract lines that are file paths
   set +e
-  echo "$(config checkout 2>&1 || true | awk '/overwritten by checkout:/{flag=1;next}/Aborting/{flag=0}flag')"
-  echo "$(config checkout 2>&1 || true | awk '/overwritten by checkout:/{flag=1;next}/Aborting/{flag=0}flag' | sed 's/^[[:space:]]*//')"
-  conflicts=$(config checkout 2>&1 || true | awk '/overwritten by checkout:/{flag=1;next}/Aborting/{flag=0}flag' | sed 's/^[[:space:]]*//')
+  checkout=$(config checkout 2>&1 || true)
   set -e
+
+  # run checkout once and capture stderr; use sed to extract lines that are file paths
+  conflicts=$(echo "$checkout" | awk '/overwritten by checkout:/{flag=1;next}/Aborting/{flag=0}flag' | sed 's/^[[:space:]]*//')
+  echo "Detected conflicts:"
+  echo "$conflicts"
 
   # Move each conflict, creating parent dirs in backup
   while IFS= read -r file; do
