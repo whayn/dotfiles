@@ -28,6 +28,8 @@ else
 
   # run checkout once and capture stderr; use sed to extract lines that are file paths
   set +e
+  echo "$(config checkout 2>&1 || true | awk '/overwritten by checkout:/{flag=1;next}/Aborting/{flag=0}flag')"
+  echo "$(config checkout 2>&1 || true | awk '/overwritten by checkout:/{flag=1;next}/Aborting/{flag=0}flag' | sed 's/^[[:space:]]*//')"
   conflicts=$(config checkout 2>&1 || true | awk '/overwritten by checkout:/{flag=1;next}/Aborting/{flag=0}flag' | sed 's/^[[:space:]]*//')
   set -e
 
