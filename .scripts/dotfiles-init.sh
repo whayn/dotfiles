@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-#!/usr/bin/env bash
-set -eu pipefail
+set -euo pipefail
 
 DOTFILES_REPO="https://github.com/whayn/dotfiles.git"
 GIT_DIR="$HOME/.dotfiles"
@@ -28,8 +27,10 @@ else
   echo "Checkout failed — backing up conflicting files to $BACKUP_DIR"
 
   # run checkout once and capture stderr; use sed to extract lines that are file paths
+  set +e
   conflicts=$(config checkout 2>&1 || true \
     | sed -n 's/^[[:space:]]\+\(.*\)/\1/p')
+  set -e
 
   # Move each conflict, creating parent dirs in backup
   while IFS= read -r file; do
