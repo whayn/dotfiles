@@ -28,14 +28,14 @@ unset rc
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/tp-home018/mfalgay/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$("$HOME/miniforge3/bin/conda" 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/tp-home018/mfalgay/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/home/tp-home018/mfalgay/miniforge3/etc/profile.d/conda.sh"
+    if [ -f "$HOME/whayn/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/miniforge3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/tp-home018/mfalgay/miniforge3/bin:$PATH"
+        export PATH="$HOME/miniforge3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -44,8 +44,8 @@ unset __conda_setup
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba shell init' !!
-export MAMBA_EXE='/home/tp-home018/4a5d105a-0c44-4968-a1a6-f754540e9e6d/miniforge3/bin/mamba';
-export MAMBA_ROOT_PREFIX='/home/tp-home018/4a5d105a-0c44-4968-a1a6-f754540e9e6d/.local/share/mamba';
+export MAMBA_EXE="$HOME/miniforge3/bin/mamba";
+export MAMBA_ROOT_PREFIX="$HOME/.local/share/mamba";
 __mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__mamba_setup"
@@ -56,8 +56,16 @@ unset __mamba_setup
 # <<< mamba initialize <<<
 
 # fnm
-FNM_PATH="/home/whayn/.local/share/fnm"
+FNM_PATH="$HOME/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
   export PATH="$FNM_PATH:$PATH"
   eval "`fnm env`"
 fi
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

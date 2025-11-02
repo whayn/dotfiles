@@ -51,18 +51,17 @@ end
 
 # Setup mamba before init packages
 # >> mamba initialize >>
-# !! Contents within this block are managed by 'mamba shell init' !!
-# No they arent because I manage them myself ¬_¬
+
 if test -x "$HOME/miniforge3/bin/mamba"
     set -gx MAMBA_EXE "$HOME/miniforge3/bin/mamba"
     set -gx MAMBA_ROOT_PREFIX "$HOME/.local/share/mamba"
     $MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
 end
+
 # << mamba initialize <<
 
-# >> conda initialize >>
+# >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-# No they arent because I manage them myself ¬_¬
 if test -f $HOME/miniforge3/bin/conda
     eval $HOME/miniforge3/bin/conda "shell.fish" "hook" $argv | source
 else
@@ -72,7 +71,8 @@ else
         set -x PATH "$HOME/miniforge3/bin" $PATH
     end
 end
-# << conda initialize <<
+# <<< conda initialize <<<
+
 
 # Starship setup
 if type -q starship
@@ -98,5 +98,9 @@ if type -q direnv
 	direnv hook fish | source
 end
 
-
-# fastfetch
+# pnpm
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
