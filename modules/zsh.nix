@@ -5,16 +5,19 @@
 
     enableCompletion = true;
 
-    zplug = {
+    antidote = {
       enable = true;
       plugins = [
-        { name = "zsh-users/zsh-autosuggestions"; }
-        { name = "zsh-users/zsh-history-substring-search"; }
-        { name = "olets/zsh-abbr"; }
+        "olets/zsh-autosuggestions-abbreviations-strategy"
       ];
     };
 
     syntaxHighlighting.enable = true;
+    autosuggestion.enable = true;
+    historySubstringSearch.enable = true;
+    zsh-abbr.enable = true;
+
+    programs.ghostty.enableZshIntegration = true;
 
     history = {
       size = 10000;
@@ -31,7 +34,7 @@
       abbr add --quiet --position anywhere -- --help '--help | bat -plhelp'
       abbr add --quiet --position anywhere -- -h '-h | bat -plhelp'
 
-      PROMPT='%F{red}%n%F{yellow}@%F{green}%m%F{cyan}:%F{blue}%~%F{magenta} > %f'
+      ${builtins.readFile ../assets/rainbow-prompt.zsh}
 
       # Syntax higlighting
       source ${
