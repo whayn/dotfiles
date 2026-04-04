@@ -32,7 +32,9 @@
       abbr add --quiet --position anywhere -- --help '--help | bat -plhelp'
       abbr add --quiet --position anywhere -- -h '-h | bat -plhelp'
 
-      PROMPT="%n@%m:%~ > "
+      PROMPT="%F{green}%n%f@%F{cyan}%m%f:%F{yellow}%~%f %F{magenta}>%f "
+
+
 
       # some fukcin bindings
       bindkey "^[[1;5C" forward-word
@@ -42,6 +44,18 @@
       bindkey "^[[H" beginning-of-line
       bindkey "^[[F" end-of-line
       bindkey "^[[3~" delete-char
+
+      # sorry sudo
+      prepend-sudo() {
+        if [[ -z "$BUFFER" ]]; then
+          LBUFFER="sudo $(fc -ln -1)"
+        elif [[ $BUFFER != su(do|)\ * ]]; then
+          BUFFER="sudo $BUFFER"
+          CURSOR+=5
+        fi
+      }
+      zle -N prepend-sudo
+      bindkey "^[s" prepend-sudo
 
       # Syntax higlighting
       source ${
