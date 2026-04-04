@@ -32,6 +32,7 @@
       abbr add --quiet --position anywhere -- --help '--help | bat -plhelp'
       abbr add --quiet --position anywhere -- -h '-h | bat -plhelp'
 
+      PROMPT="%n@%m:%~ > "
 
       # Syntax higlighting
       source ${
@@ -43,7 +44,7 @@
         }
       }/themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
     '';
-    # can add 
+    # can add
     # ${builtins.readFile ../assets/rainbow-prompt.zsh}
   };
 
