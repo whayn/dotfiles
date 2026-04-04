@@ -34,7 +34,7 @@ build_rainbow_prompt() {
 
   # %f resets color.
   # %{\e[5 q%} sets the cursor to a blinking bar (use 1 q for blinking block).
-  PROMPT="${new_prompt}%f%{\e[5 q%}"
+  PROMPT="${new_prompt}%f"
 }
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd build_rainbow_prompt
