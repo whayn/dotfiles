@@ -17,8 +17,6 @@
     historySubstringSearch.enable = true;
     zsh-abbr.enable = true;
 
-    programs.ghostty.enableZshIntegration = true;
-
     history = {
       size = 10000;
       save = 10000;
