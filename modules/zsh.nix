@@ -27,7 +27,7 @@
       cat = "bat";
     };
 
-    initExtra = ''
+    initContent = ''
       abbr add --quiet --position anywhere -- --help '--help | bat -plhelp'
       abbr add --quiet --position anywhere -- -h '-h | bat -plhelp'
 
