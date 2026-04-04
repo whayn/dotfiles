@@ -32,7 +32,6 @@
       abbr add --quiet --position anywhere -- --help '--help | bat -plhelp'
       abbr add --quiet --position anywhere -- -h '-h | bat -plhelp'
 
-      ${builtins.readFile ../assets/rainbow-prompt.zsh}
 
       # Syntax higlighting
       source ${
@@ -44,7 +43,8 @@
         }
       }/themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
     '';
-
+    # can add 
+    # ${builtins.readFile ../assets/rainbow-prompt.zsh}
   };
 
   # programs.starship = {
