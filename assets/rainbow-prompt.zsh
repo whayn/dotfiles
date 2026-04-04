@@ -14,19 +14,27 @@ build_rainbow_prompt() {
   for (( i=0; i < len; i++ )); do
     local char="${raw_text:$i:1}"
 
-    # Calculate smooth RGB values using sine waves offset by 120 degrees (2pi/3)
-    local r=$(( int(sin(freq * i + 0) * 127 + 128) ))
-    local g=$(( int(sin(freq * i + 2.0944) * 127 + 128) ))
-    local b=$(( int(sin(freq * i + 4.1888) * 127 + 128) ))
+    # Calculate RGB values.
+    # Using a higher amplitude (200) and clamping pushes colors to the edges
+    # of the color space, eliminating the "muddy/gray" transition colors.
+    local r=$(( int(sin(freq * i + 0) * 200 + 128) ))
+    local g=$(( int(sin(freq * i + 2.0944) * 200 + 128) ))
+    local b=$(( int(sin(freq * i + 4.1888) * 200 + 128) ))
+
+    # Clamp to 0-255
+    (( r = r > 255 ? 255 : (r < 0 ? 0 : r) ))
+    (( g = g > 255 ? 255 : (g < 0 ? 0 : g) ))
+    (( b = b > 255 ? 255 : (b < 0 ? 0 : b) ))
 
     # Format directly as a zsh truecolor code %F{#RRGGBB}
-    # Using printf -v avoids subshell performance penalties
-    local hex
-    printf -v hex "%%F{#%02x%02x%02x}" $r $g $b
+    # Using pure zsh parameter expansion instead of printf to avoid the printing bug
+    local hex="%F{#${(l:2::0:)$(([##16]r))}${(l:2::0:)$(([##16]g))}${(l:2::0:)$(([##16]b))}}"
     new_prompt+="${hex}${char}"
   done
 
-  PROMPT="${new_prompt}%f"
+  # %f resets color.
+  # %{\e[5 q%} sets the cursor to a blinking bar (use 1 q for blinking block).
+  PROMPT="${new_prompt}%f%{\e[5 q%}"
 }
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd build_rainbow_prompt
