@@ -32,9 +32,13 @@
       abbr add --quiet --position anywhere -- --help '--help | bat -plhelp'
       abbr add --quiet --position anywhere -- -h '-h | bat -plhelp'
 
+      # good lookaing completiosn
+      zmodload zsh/complist
+      zstyle ':completion:*' menu select
+      zstyle ':completion:*' list-colors ""
+
+
       PROMPT="%F{green}%n%f@%F{cyan}%m%f:%F{yellow}%~%f %F{magenta}>%f "
-
-
 
       # some fukcin bindings
       bindkey "^[[1;5C" forward-word
