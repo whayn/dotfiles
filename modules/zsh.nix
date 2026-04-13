@@ -28,6 +28,10 @@
       cat = "bat";
     };
 
+    envExtra = ''
+      export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH"
+    '';
+
     initContent = ''
       abbr add --quiet --position anywhere -- --help '--help | bat -plhelp'
       abbr add --quiet --position anywhere -- -h '-h | bat -plhelp'
@@ -80,6 +84,9 @@
   #   enableZshIntegration = true;
 
   # };
+  #
+  #
+
 
   programs.eza = {
     enable = true;
