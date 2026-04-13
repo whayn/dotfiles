@@ -42,7 +42,7 @@
       zstyle ':completion:*' list-colors ""
 
 
-      PROMPT="%F{green}%n%f@%F{cyan}%m%f:~ > "
+      PROMPT="%F{green}%n%f@%F{cyan}%m%f:%~ > "
 
       # some fukcin bindings
       bindkey "^[[1;5C" forward-word
@@ -86,7 +86,6 @@
   # };
   #
   #
-
 
   programs.eza = {
     enable = true;
